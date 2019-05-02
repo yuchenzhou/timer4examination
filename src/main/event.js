@@ -2,7 +2,7 @@ import {plans, loadHistoryFromFile} from "./history";
 import {settings} from "./setting";
 import {defaultPlan} from "./setting";
 
-let planName = "default";
+export let planName = plans[0].name;
 
 export function init() {
     loadHistoryFromFile();
@@ -18,12 +18,13 @@ export function addPlan(pn) {
     };
     plans.push(plan);
 }
-export function getPlan(planName) {
+export function getPlan() {
     for (const plan in plans){
-        if (plan.name === planName){
-            return plan;
+        if (plans[plan].name === planName){
+            return plans[plan];
         }
     }
+    return planName;
 }
 export function switchPlan(pn) {
     planName = pn;

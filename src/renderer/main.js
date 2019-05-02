@@ -8,6 +8,7 @@ import language from '../config'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.use(VueI18n)
+window.EventBus = new Vue();
 Vue.config.productionTip = false
 
 const i18n = new VueI18n({

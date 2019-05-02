@@ -1,7 +1,7 @@
 <template>
     <label>
         选择你的方案
-        <select v-model="selected" @change="detectiveChange">
+        <select v-model="selected" @change="detectiveChange" @click="refresh">
             <option  v-for="plan in plans">{{plan.name}}</option>
         </select>
     </label>
@@ -22,11 +22,22 @@
         methods: {
             detectiveChange(){
                 controller.switchPlan(this.$data.selected);
-                console.log(this.$data.selected)
+                // TODO:debug cause planName in controller doesnt works.
 
+            },
+            // an ugly refresh method called when clicked.
+            refresh(){
+                const plans = controller.getPlans();
+                this.$data.plans = plans;
             }
-        }
-
+        },
+        //mounted: {
+        //     listen() {
+        //         EventBus.$on('createPlan', ($event)=>{
+        //             this.$options.methods.refresh();
+        //         });
+        //     }
+        //}
     }
 
 </script>

@@ -50,11 +50,10 @@
         padding-top: 2%
     }
     #plan {
-        height: 75%;
+        height: 75vh;
         width: 100%;
         border:1px solid #888888;
         box-shadow: 10px 10px 5px #888888;
-        padding-top: 50%
     }
     #selectPlan{
         float: left;

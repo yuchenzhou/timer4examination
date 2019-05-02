@@ -9,7 +9,7 @@
         <label>
             <input v-model="newPlanName" :placeholder=$t(newPlanName) style="display: inline">
         </label>
-        <div id='okBTN' @click="create">
+        <div id='okBTN' @click="create" ><!--@keyup.enter.native="create"-->
             <img src="../../../../static/ok.jpg" alt="ok"/>
         </div>
         <div id="cancel" @click="switchStatus" style="display: inline">
@@ -49,6 +49,8 @@
                 // this.$options.methods.switchStatus();
                 this.$data.btnShow = true;
                 this.$data.textShow = false;
+                EventBus.$emit("createPlan", "createPlan");
+                // TODO: refresh planSelect
             }
         }
     }
