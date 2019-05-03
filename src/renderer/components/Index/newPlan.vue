@@ -9,12 +9,13 @@
         <label>
             <input v-model="newPlanName" :placeholder=$t(newPlanName) style="display: inline">
         </label>
-        <div id='okBTN' @click="create" ><!--@keyup.enter.native="create"-->
-            <img src="../../../../static/ok.jpg" alt="ok"/>
-        </div>
-        <div id="cancel" @click="switchStatus" style="display: inline">
-            取消
-        </div>
+        <span id='okBTN' @click="create" style="display: inline"><!--@keyup.enter.native="create"-->
+            <!---img src="../../../../static/ok.jpg" alt="ok"/--->
+            {{$t('apply')}}
+        </span>
+        <span id="cancel" @click="switchStatus" style="display: inline">
+            {{$t('cancel')}}
+        </span>
 
     </div>
 </div>
@@ -51,7 +52,7 @@
                 this.$data.btnShow = true;
                 this.$data.textShow = false;
                 EventBus.$emit("createPlan", "createPlan");
-                // TODO: refresh planSelect
+                // TODO: check empty & duplicated name
             }
         }
     }

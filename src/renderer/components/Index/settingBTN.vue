@@ -1,6 +1,6 @@
 <template>
     <div id="settingBtn">
-        <img src="../../../../static/settingicon.png" @click="onclick" :alt=$t(settings)>
+        <img src="../../../../static/settingicon.png" height="30" width="30"/>
     </div>
 </template>
 

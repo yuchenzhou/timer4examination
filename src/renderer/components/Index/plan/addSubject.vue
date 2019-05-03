@@ -13,12 +13,12 @@
         <div>{{$t('lenOfExam')}}: <label>
             <input v-model="length" type="text"/>
         </label></div>
-        <div @click="addSubject">
+        <span @click="addSubject">
             {{$t('apply')}}
-        </div>
-        <div @click="switchShow">
+        </span>
+        <span @click="switchShow">
             {{$t('cancel')}}
-        </div>
+        </span>
     </div>
 </div>
 </template>
@@ -29,6 +29,7 @@
     const controller = remote.app.controller;
     const startTime = moment().format().slice(0,16);
     import EventBus from '../../../eventBus';
+    import cuid from 'cuid';
     export default {
         name: "addSubject",
         methods: {
@@ -39,8 +40,8 @@
                     startTime: this.startTime,
                     length: this.length,
                     schedules: [],
+                    id: cuid(),
                 });
-                console.log(this.startTime);
                 this.switchShow();
                 EventBus.$emit("refreshPlan", "createPlan");
 

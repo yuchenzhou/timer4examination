@@ -27,7 +27,7 @@
             {{endTime}}
         </div>
     </div>
-    <schedule v-for="schedule in schedules" v-bind:schedule="schedule"></schedule>
+    <schedule v-for="schedule in schedules" v-bind:schedule="schedule" :key="schedule.name"></schedule>
     <add-schedule></add-schedule>
     <div @click="deleteSubject">删除</div>
 </div>
@@ -44,14 +44,15 @@
         name: "subject",
         components: {Schedule, addSchedule},
         props: [
-            'subject'
+            'subjectp'
         ],
         data() {
             return {
-                name: this.subject.name,
-                startTime: this.subject.startTime,
-                length: this.subject.length,
-                schedules: this.subject.schedules,
+                name: this.subjectp.name,
+                startTime: this.subjectp.startTime,
+                length: this.subjectp.length,
+                schedules: this.subjectp.schedules,
+                id: this.subjectp.id,
                 // endTime: startTime + length,
             }
         },
@@ -59,20 +60,29 @@
             endTime: function () {
                 return moment(this.startTime).add(this.length, 'm').format().slice(0,16);
                 // console.log(moment(this.startTime).add(this.length, 'm'));
+            },
+            subject: function () {
+                return {
+                    id: this.id,
+                    name: this.name,
+                    startTime: this.startTime,
+                    length: this.length,
+                    schedules: this.schedules,
+                }
+
             }
         },
         methods: {
             change() {
-                // TODO: change method
-                console.log("changed")
+                controller.editSubject(this.subject);
+                EventBus.$emit("refreshPlan", this.id);
             },
             deleteSubject() {
-                controller.deleteSubject(this.name);
-                EventBus.$emit("deleteSubject", this.name);
+                controller.deleteSubject(this.id);
+                EventBus.$emit("deleteSubject", this.id);
             }
         },
         mounted() {
-            console.log(this.name);
         }
 
     }
