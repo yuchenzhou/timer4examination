@@ -43,8 +43,8 @@ export function deletePlan(pn) {
 
 export function addSubject(subject) {
     for (const plan in plans){
-        if (plan.name === planName){
-            plan.subjects.push(subject);
+        if (plans[plan].name === planName){
+            plans[plan].subjects.push(subject);
             // TODO:add into timer
             break;
         }

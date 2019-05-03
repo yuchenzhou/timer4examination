@@ -1,31 +1,85 @@
 <template>
-<div class="subject" @click="addSubject">
-
+<div id="addSubject" >
+    <div id="img" @click="switchShow" :class="{show:imgShow, hidden:!imgShow}">
+        <img src="../../../../../static/create.png" height="70" width="70"/>
+    </div>
+    <div id="frame" :class="{show:!imgShow, hidden:imgShow}">
+        <div>{{$t('subjectName')}}: <label>
+            <input v-model="name" type="text"/>
+        </label></div>
+        <div>{{$t('startTime')}}: <p></p><label>
+            <input v-model="startTime" type="datetime-local"/>
+        </label></div>
+        <div>{{$t('lenOfExam')}}: <label>
+            <input v-model="length" type="text"/>
+        </label></div>
+        <div @click="addSubject">
+            {{$t('apply')}}
+        </div>
+        <div @click="switchShow">
+            {{$t('cancel')}}
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
+    const remote = require('electron').remote;
+    const moment = require('moment');
+    const controller = remote.app.controller;
+    const startTime = moment().format().slice(0,16);
+    import EventBus from '../../../eventBus';
     export default {
         name: "addSubject",
         methods: {
             addSubject() {
+                controller.addSubject({
+                    name: this.name,
+                    startTime: this.startTime,
+                    length: this.length,
+                    schedules: [],
+                });
+                console.log(this.startTime);
+                this.switchShow();
+                EventBus.$emit("refreshPlan", "createPlan");
 
+            },
+            switchShow() {
+                this.imgShow = !this.imgShow;
+            },
+
+        },
+        data() {
+            return {
+                name: "",
+                startTime,
+                length: 0,
+                imgShow: true,
             }
-
         }
     }
 </script>
 
 <style scoped>
-    .subject{
+    .show{
+        display: block;
+    }
+    .hidden{
+        display: none;
+    }
+    #addSubject{
         border: 1px solid #888888;
         height: 96%;
         margin: 1%;
-        width: 40%;
+        width: 210px;
         display: inline-block;
+        vertical-align: top;
     }
     #img{
-        margin: 20%;
-        display: inline-block;
+        margin-top: 50%;
+        margin-left: 35%;
+    }
+    #frame{
+
     }
 </style>

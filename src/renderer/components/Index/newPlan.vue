@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import EventBus from '../../eventBus';
     export default {
         name: "newPlan",
         data() {
@@ -72,10 +73,15 @@
     #plus{
         width: 30px;
         height: 30px;
+        vertical-align: top;
     }
     #okBTN{
         display: inline;
         width: 30px;
         height: 30px;
+        vertical-align: top;
+    }
+    #test{
+        vertical-align: top;
     }
 </style>

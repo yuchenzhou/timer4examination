@@ -1,6 +1,6 @@
 <template>
 <div id="plan">
-    <subject v-for="subject in subjects" v-bind:name="subject.name" v-bind:start-time="subject.startTime" v-bind:length="subject.length" v-bind:schedules="subject.schedules"></subject>
+    <subject v-for="subject in subjects" v-bind:name="subject.name" v-bind:start-timep="subject.startTime" v-bind:length="subject.length" v-bind:schedules="subject.schedules"></subject>
     <add-subject></add-subject>
 </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
     import subject from './plan/subject';
     import addSubject from './plan/addSubject';
+    import EventBus from '../../eventBus';
     const remote = require('electron').remote;
     const controller = remote.app.controller;
     const subjects = controller.getPlan().subjects;
@@ -28,6 +29,15 @@
                 this.$data.subjects = controller.getPlan().subjects;
             }
         },
+        mounted() {
+            EventBus.$on('planSwitch', (_) => {
+                this.refreshSubjects();
+            });
+            EventBus.$on('refreshPlan', (_) => {
+                this.refreshSubjects();
+            });
+
+        }
     }
 </script>
 

@@ -8,8 +8,10 @@
 </template>
 
 <script>
+    // TODO: call refresh when create plan instead of refreshing everytime.
     const remote = require('electron').remote;
     const controller = remote.app.controller;
+    import EventBus from '../../eventBus';
     export default {
         name: "plan-select",
         data() {
@@ -22,22 +24,22 @@
         methods: {
             detectiveChange(){
                 controller.switchPlan(this.$data.selected);
+                EventBus.$emit('planSwitch', "")
                 // TODO:debug cause planName in controller doesnt works.
 
             },
             // an ugly refresh method called when clicked.
             refresh(){
                 const plans = controller.getPlans();
-                this.$data.plans = plans;
+                this.plans = plans;
             }
         },
-        //mounted: {
-        //     listen() {
-        //         EventBus.$on('createPlan', ($event)=>{
-        //             this.$options.methods.refresh();
-        //         });
-        //     }
-        //}
+        mounted() {
+                 EventBus.$on('createPlan', ($event)=>{
+                     console.log("get createPlan");
+                     this.$options.methods.refresh();
+                 });
+        }
     }
 
 </script>
