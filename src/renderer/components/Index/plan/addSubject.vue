@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    const remote = require('electron').remote;
     const moment = require('moment');
+    const remote = require('electron').remote;
     const controller = remote.app.controller;
     const startTime = moment().format().slice(0,16);
     import EventBus from '../../../eventBus';
@@ -33,6 +33,7 @@
         name: "addSubject",
         methods: {
             addSubject() {
+                // TODO: check duplicated name
                 controller.addSubject({
                     name: this.name,
                     startTime: this.startTime,
@@ -53,7 +54,7 @@
             return {
                 name: "",
                 startTime,
-                length: 0,
+                length: 120,
                 imgShow: true,
             }
         }

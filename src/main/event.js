@@ -49,18 +49,19 @@ export function addSubject(subject) {
             break;
         }
     }
-
 }
 
-export function editSubject(subject) {
 
-}
-
-export function deleteSubject(subject) {
+export function deleteSubject(subjectName) {
     for (const plan in plans){
-        if (plan.name === planName){
+        if (plans[plan].name === planName){
             // TODO: delete from timer.2
-            plan.subjects.remove(subject);
+            for(const subject in plans[plan].subjects){
+                if(plans[plan].subjects[subject].name === subjectName)
+                {
+                    plans[plan].subjects.splice(subject,1);
+                }
+            }
             break;
         }
     }

@@ -1,8 +1,7 @@
 <template>
 <div>
-    {{schedule.name}}
-    {{schedule.positionBy}}
-    {{schedule.offset}}
+    {{schedule.name}}:
+    {{$tc(`scheduleText[${template}]`, 0, {n: Math.abs(schedule.offset)})}}
 </div>
 </template>
 
@@ -18,6 +17,11 @@
             },
             edit(){
 
+            }
+        },
+        computed: {
+            template: function (){
+                return this.schedule.positionBy*2 + (this.schedule.offset>=0?1:0)
             }
         }
     }

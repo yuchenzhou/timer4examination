@@ -1,6 +1,6 @@
 <template>
 <div id="plan">
-    <subject v-for="subject in subjects" v-bind:name="subject.name" v-bind:start-timep="subject.startTime" v-bind:length="subject.length" v-bind:schedules="subject.schedules"></subject>
+    <subject v-for="subject in subjects" v-bind:subject="subject" :key="subject.name"></subject>
     <add-subject></add-subject>
 </div>
 </template>
@@ -26,7 +26,20 @@
         },
         methods: {
             refreshSubjects(){
-                this.$data.subjects = controller.getPlan().subjects;
+                // bug here when delete subject
+                this.subjects = controller.getPlan().subjects;
+                this.$forceUpdate();
+                console.log(this.subjects);
+            },
+            deleteSubject(name){
+                console.log("11111");
+                for(const i in this.subjects){
+                    if(this.subjects[i].name === name)
+                    {
+                        this.subjects.splice(i,1);
+                    }
+                }
+                this.$forceUpdate();
             }
         },
         mounted() {
@@ -35,6 +48,9 @@
             });
             EventBus.$on('refreshPlan', (_) => {
                 this.refreshSubjects();
+            });
+            EventBus.$on('deleteSubject', (name) => {
+                this.deleteSubject(name);
             });
 
         }
