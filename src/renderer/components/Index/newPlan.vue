@@ -6,9 +6,11 @@
         </div>
     </div>
     <div id="text" :class="{show:textShow, hidden:!textShow}">
+
         <label>
             <input v-model="newPlanName" :placeholder=$t(newPlanName) style="display: inline">
         </label>
+
         <span id='okBTN' @click="create" style="display: inline"><!--@keyup.enter.native="create"-->
             <!---img src="../../../../static/ok.jpg" alt="ok"/--->
             {{$t('apply')}}
@@ -77,6 +79,12 @@
         vertical-align: top;
     }
     #okBTN{
+        display: inline;
+        width: 30px;
+        height: 30px;
+        vertical-align: top;
+    }
+    #cancel{
         display: inline;
         width: 30px;
         height: 30px;

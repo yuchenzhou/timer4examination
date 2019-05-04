@@ -1,6 +1,7 @@
 import {plans, loadHistoryFromFile} from "./history";
 import {settings} from "./setting";
 import {defaultPlan} from "./setting";
+import cuid from "cuid";
 
 export let planName = plans[0].name;
 
@@ -82,3 +83,56 @@ export function deleteSubject(subjectId) {
     }
 }
 
+export function addSchedule(subjectId, schedule) {
+    for (const plan in plans){
+        if (plans[plan].name === planName){
+            // TODO: delete from timer.2
+            for(const subject in plans[plan].subjects){
+                if(plans[plan].subjects[subject].id === subjectId)
+                {
+                    plans[plan].subjects[subject].schedules.push(schedule)
+                }
+            }
+            break;
+        }
+    }
+}
+
+/* unused function
+export function editSchedule(subjectId, schedule) {
+    for (const plan in plans){
+        if (plans[plan].name === planName){
+            // TODO: delete from timer.2
+            for(const subject in plans[plan].subjects){
+                if(plans[plan].subjects[subject].id === subjectId)
+                {
+                    for(const i in plans[plan].subjects[subject].schedules){
+                        if(plans[plan].subjects[subject].schedules[i].id === schedule.id){
+                            plans[plan].subjects[subject].schedules[i] = schedule;
+                        }
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+export function deleteSchedule(subjectId, schedule) {
+    for (const plan in plans){
+        if (plans[plan].name === planName){
+            // TODO: delete from timer.2
+            for(const subject in plans[plan].subjects){
+                if(plans[plan].subjects[subject].id === subjectId)
+                {
+                    for(const i in plans[plan].subjects[subject].schedules){
+                        if(plans[plan].subjects[subject].schedules[i].id === schedule.id){
+                            plans[plan].subjects[subject].schedules.splice(i, 1);
+                        }
+                    }
+                }
+            }
+            break;
+        }
+    }
+}*/

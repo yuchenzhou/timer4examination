@@ -1,7 +1,11 @@
 <template>
 <div class="subject">
     <div id="name">
-        {{name}}
+        <div id="nameText" @click="switchNameEdit" :class="{show:!editNameShow, hidden:editNameShow}">{{name}}</div>
+        <label :class="{show:editNameShow, hidden:!editNameShow}">
+            <input v-model="name" @change="nameChange">
+        </label>
+        <!---{{name}}-->
         <!--未开始/进行中/已完成--->
     </div>
     <div id="start">
@@ -12,7 +16,7 @@
             </label>
         </form>
         <div>
-            {{startTime}}
+            <!--{{startTime}}-->
         </div>
     </div>
     <div id="len">
@@ -27,9 +31,9 @@
             {{endTime}}
         </div>
     </div>
-    <schedule v-for="schedule in schedules" v-bind:schedule="schedule" :key="schedule.name"></schedule>
-    <add-schedule></add-schedule>
-    <div @click="deleteSubject">删除</div>
+    <schedule v-for="schedule in schedules" v-bind:schedulep="schedule" :key="schedule.id" v-bind:subjectId="id"></schedule>
+    <add-schedule v-bind:subject-id="id"></add-schedule>
+    <div @click="deleteSubject" id="deleteBTN">删除</div>
 </div>
 </template>
 
@@ -40,6 +44,7 @@
     const remote = require('electron').remote;
     const controller = remote.app.controller;
     import EventBus from '../../../eventBus';
+    import cuid from 'cuid';
     export default {
         name: "subject",
         components: {Schedule, addSchedule},
@@ -53,7 +58,7 @@
                 length: this.subjectp.length,
                 schedules: this.subjectp.schedules,
                 id: this.subjectp.id,
-                // endTime: startTime + length,
+                editNameShow: false,
             }
         },
         computed: {
@@ -76,11 +81,33 @@
             change() {
                 controller.editSubject(this.subject);
                 EventBus.$emit("refreshPlan", this.id);
+                EventBus.$emit("edit successfully", this.id);
             },
             deleteSubject() {
                 controller.deleteSubject(this.id);
                 EventBus.$emit("deleteSubject", this.id);
-            }
+            },
+            switchNameEdit() {
+                this.editNameShow = !this.editNameShow;
+            },
+            nameChange() {
+                this.switchNameEdit();
+                this.change();
+            },
+            addSchedule(schedule) {
+                this.schedules.push(schedule);
+                this.change();
+                // call change
+            },
+            deleteSchedule(schedule) {
+                for(const i in this.schedules){
+                    if(this.schedules[i].id===schedule.id){
+                        this.schedules.splice(i,1)
+                    }
+                }
+                this.change();
+
+            },
         },
         mounted() {
         }
@@ -89,6 +116,12 @@
 </script>
 
 <style scoped>
+    .show{
+        display: inline;
+    }
+    .hidden{
+        display: none;
+    }
     .subject{
         border: 1px solid #888888;
         height: 96%;
@@ -96,5 +129,12 @@
         width: 210px;
         display: inline-block;
         vertical-align: top;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    #deleteBTN{
+        border: 1px solid #888888;
+        margin: 3px;
+        width:fit-content;
     }
 </style>

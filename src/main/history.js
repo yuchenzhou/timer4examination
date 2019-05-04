@@ -10,14 +10,18 @@ export const plans = [
                 "length": 120,
                 "schedules": [
                     {
+                        "id": cuid(),
                         "name": "开考前15分钟",
+                        "selected": true,
                         "positionBy": 0,
                         "offset": -15,
                         "mediaPath": "",
                         "volume": 100
                     },
                     {
+                        "id": cuid(),
                         "name": "结束后15分钟",
+                        "selected": true,
                         "positionBy": 1,
                         "offset": 15,
                         "mediaPath": "",
@@ -31,14 +35,18 @@ export const plans = [
                 "length": 120,
                 "schedules": [
                     {
+                        "id": cuid(),
                         "name": "开考前15分钟",
+                        "selected": true,
                         "positionBy": 0,
                         "offset": 15,
                         "mediaPath": "",
                         "volume": 100
                     },
                     {
+                        "id": cuid(),
                         "name": "结束前15分钟",
+                        "selected": true,
                         "positionBy": 1,
                         "offset": -15,
                         "mediaPath": "",
@@ -52,14 +60,18 @@ export const plans = [
                 "length": 120,
                 "schedules": [
                     {
+                        "id": cuid(),
                         "name": "开考前15分钟",
+                        "selected": true,
                         "positionBy": 0,
                         "offset": -15,
                         "mediaPath": "",
                         "volume": 100
                     },
                     {
+                        "id": cuid(),
                         "name": "结束前15分钟",
+                        "selected": true,
                         "positionBy": 1,
                         "offset": 13,
                         "mediaPath": "",
@@ -78,6 +90,7 @@ export const plans = [
                 "length": 120,
                 "schedules": [
                     {
+                        "id": cuid(),
                         "name": "开考前15分钟",
                         "positionBy": 1,
                         "offset": -15,
@@ -85,6 +98,7 @@ export const plans = [
                         "volume": 100
                     },
                     {
+                        "id": cuid(),
                         "name": "结束前15分钟",
                         "positionBy": 0,
                         "offset": -15,
