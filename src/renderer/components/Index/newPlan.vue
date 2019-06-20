@@ -62,21 +62,28 @@
 
 <style scoped>
     .show{
-        display: inline;
+        display: inline-block;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+    .show label{
+        padding-left: 5px;
     }
     .hidden{
         display: none;
     }
     img{
-        width: auto;
-        height: auto;
-        max-width: 30px;
-        max-height: 30px;
+        padding: 5px 0;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
     }
     #plus{
         width: 30px;
         height: 30px;
         vertical-align: top;
+        text-align: center;
     }
     #okBTN{
         display: inline;
@@ -89,6 +96,9 @@
         width: 30px;
         height: 30px;
         vertical-align: top;
+    }
+    #text span{
+        cursor: pointer;
     }
     #test{
         vertical-align: top;

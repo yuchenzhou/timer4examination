@@ -18,6 +18,12 @@
         </div>
         <div class="tmp"></div>
         <div id="footer">
+            <div class="audioPlay">
+                <audio controls loop controlsList="nodownload">
+<!--                    TODO: src变量需要v-model引入-->
+<!--                    <source src="../../../static/horse.mp3" >-->
+                </audio>
+            </div>
             <div id="time"><nowTime></nowTime></div>
             <div style="clear: both;"></div>
         </div>
@@ -52,11 +58,17 @@
     #plan {
         height: 75vh;
         width: 100%;
-        border:1px solid #888888;
-        box-shadow: 10px 10px 5px #888888;
+        border:1px solid #bbb;
+        border-radius: 3px;
+        box-shadow: -5px 10px 5px #888;
     }
     #selectPlan{
         float: left;
+        line-height: 30px;
+        height: 100%;
+    }
+    #top{
+        height: 30px;
     }
     #newPlan {
         float: left;
@@ -64,10 +76,31 @@
     #setting {
         float: right;
     }
+    #footer{
+        margin-top: 7px;
+    }
     #time {
         float: right;
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
     }
-
-
-
+    #plan::-webkit-scrollbar{
+        width: 6px;
+        height: 6px;
+    }
+    #plan::-webkit-scrollbar-track{
+        background-color: #eee;
+        border-radius: 3px;
+    }
+    #plan::-webkit-scrollbar-thumb {
+        border-radius: 7px;
+        background-color: #aaa;
+    }
+    #plan::-webkit-scrollbar-corner {
+        background:#eee;
+    }
+    .audioPlay{
+        display: inline-block;
+    }
 </style>

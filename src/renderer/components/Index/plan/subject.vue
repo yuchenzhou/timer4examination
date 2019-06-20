@@ -32,8 +32,10 @@
         </div>
     </div>
     <schedule v-for="schedule in schedules" v-bind:schedulep="schedule" :key="schedule.id" v-bind:subjectId="id"></schedule>
-    <add-schedule v-bind:subject-id="id"></add-schedule>
-    <div @click="deleteSubject" id="deleteBTN">删除</div>
+    <div class="subjectOptions">
+        <add-schedule v-bind:subject-id="id"></add-schedule>
+        <div @click="deleteSubject" id="deleteBTN">删除科目</div>
+    </div>
 </div>
 </template>
 
@@ -122,6 +124,9 @@
     .hidden{
         display: none;
     }
+    #len label input{
+        width: 70px;
+    }
     .subject{
         border: 1px solid #888888;
         height: 96%;
@@ -130,11 +135,30 @@
         display: inline-block;
         vertical-align: top;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
+    }
+    .subject #nameText{
+        font-weight: bold;
+        font-size: 20px;
     }
     #deleteBTN{
-        border: 1px solid #888888;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        width: 70px;
         margin: 3px;
-        width:fit-content;
+        text-align: center;
+        outline-color: #40a9ff;
+        cursor: pointer;
+    }
+    #deleteBTN:hover{
+        border-color: #1890ff;
+    }
+    input{
+        border: 1px solid #ccc;
+        outline-color: #1890ff;
+    }
+    input:hover{
+        border-color: #1890ff;
     }
 </style>

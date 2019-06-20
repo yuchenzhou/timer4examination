@@ -1,10 +1,10 @@
 <template>
-    <label>
+    <div>
         选择你的方案
         <select v-model="selected" @change="detectiveChange" @click="refresh">
             <option  v-for="plan in plans">{{plan.name}}</option>
         </select>
-    </label>
+    </div>
 </template>
 
 <script>

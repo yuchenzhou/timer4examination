@@ -32,8 +32,16 @@
 
 <style scoped>
     #BTN{
-        border: 1px solid #888888;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         margin: 3px;
-        width:fit-content;
+        outline-color: #40a9ff;
+        padding: 5px;
+        width: 70px;
+        text-align: center;
+        cursor: pointer;
+    }
+    #BTN:hover{
+        border-color: #1890ff;
     }
 </style>

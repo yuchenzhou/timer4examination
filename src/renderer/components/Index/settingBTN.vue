@@ -23,13 +23,14 @@
 <style scoped>
 
     img{
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
+        width: 20px;
+        height: 20px;
+        padding: 5px 0;
     }
     #settingBtn{
         width: 30px;
         height: 30px;
+        text-align: center;
+        cursor: pointer;
     }
 </style>
